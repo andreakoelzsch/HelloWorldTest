@@ -1,6 +1,7 @@
 library("moveapps")
 library("move2")
 library("lubridate")
+library("sf")
 
 ## The parameter "data" is reserved for the data object passed on from the previous app
 
@@ -22,7 +23,8 @@ rFunction = function(data, sdk, year, ...) {
     artifact <- appArtifactPath("plot.png")
     logger.info(paste("plotting to artifact:", artifact))
     png(artifact)
-    plot(result[move2::mt_track_id_column(result)], max.plot=1)
+    #plot(result[move2::mt_track_id_column(result)], max.plot=1)
+    plot(st_coordinates(result[mt_track_id_column(result)]),main="HELLO WORLD!")
     dev.off()
   } else {
     logger.warn("nothing to plot")
